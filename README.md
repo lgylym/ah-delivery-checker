@@ -21,4 +21,6 @@ Here's my setup for Cloud Run:
 * Run the container as a Cloud Run service
 * Use Cloud Scheduler to trigger Cloud Run every 10 minutes
 
+Note that the Cloud Run container needs 2GB memory to run.
+
 Reference: https://cloud.google.com/run/docs/triggering/using-scheduler
