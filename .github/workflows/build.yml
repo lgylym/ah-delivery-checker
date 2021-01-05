@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HASH: $(git rev-parse --short "$GITHUB_SHA")
       BRANCH: ${GITHUB_REF##*/}
       SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
@@ -28,7 +27,7 @@ jobs:
 
       - name: Build image
         run: |-
-          docker build -t eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:$HASH .
+          docker build -t eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6} .
 
       # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
@@ -36,4 +35,4 @@ jobs:
       # Push image to Google Container Registry
       - name: Push
         run: |-
-          docker push eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
+          docker push eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6}
