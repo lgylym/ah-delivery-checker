@@ -1,4 +1,4 @@
-AH Delivery Checker checks AH website and post available delivery slots to a slack channel.
+AH Delivery Checker checks AH website and post available delivery slots to a slack channel via [slack webhook](https://api.slack.com/messaging/webhooks).
 It uses [playwright](https://github.com/microsoft/playwright-python) to visit the website and get relevant cookies, before issuing the api call.
 
 ### Run locally
