@@ -17,13 +17,8 @@ curl http://127.0.0.1:8080
 Then you'll receive the available slots in your slack channel.
 
 ### Run in Google Cloud Run
-Here's my setup in Cloud Run:
+Here's my setup for Cloud Run:
 * Run the container as a Cloud Run service
-* Use Cloud Scheduler to send message to Pub/Sub every 10 minutes
-* Connect Pub/Sub with Cloud Run to trigger it to run
+* Use Cloud Scheduler to trigger Cloud Run every 10 minutes
 
 Reference: https://cloud.google.com/run/docs/triggering/using-scheduler
-
-### TODOs
-- [x] Auto deploy to cloud run.
-- [ ] Capture cloud run setup in terraform.
