@@ -41,10 +41,5 @@ jobs:
           docker push eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6}
 
       - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v0.2.0
-        with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          service: ${{ env.CLOUD_RUN_SERVICE }}
-          image: eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6}
-          region: ${{ env.CLOUD_RUN_REGION }}
-          env_vars: POSTCODE=${{ secrets.POSTCODE }},HOUSENUMBER=${{ secrets.HOUSENUMBER }},SLACK_WEB_HOOK=${{ secrets.SLACK_WEB_HOOK }},SLACK_CHANNEL=${{ secrets.SLACK_CHANNEL }}
+        run: |-
+          gcloud run deploy ahchecker --image eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6} --region=${{ env.CLOUD_RUN_REGION }}
