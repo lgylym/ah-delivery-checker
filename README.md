@@ -1,5 +1,7 @@
 AH Delivery Checker checks AH website and post available delivery slots to a slack channel.
+It uses [playwright](https://github.com/microsoft/playwright-python) to visit the website and get relevant cookies, before issuing the api call.
 
+### Run locally
 To run locally, use the following command and replace the environment variables with yours:
 ```
 docker build -t ah-checker .
@@ -13,3 +15,6 @@ curl http://127.0.0.1:8080
 ```
 
 Then you'll receive the available slots in your slack channel.
+
+### Run in Google Cloud Run
+TBD
