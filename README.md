@@ -20,5 +20,5 @@ Then you'll receive the available slots in your slack channel.
 TBD
 
 ### TODOs
-[] Auto deploy to cloud run.
-[] Capture cloud run setup in terraform.
+[ ] Auto deploy to cloud run.
+[ ] Capture cloud run setup in terraform.
