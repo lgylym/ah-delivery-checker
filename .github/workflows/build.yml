@@ -1,3 +1,4 @@
+# From https://github.com/google-github-actions/deploy-cloudrun
 name: Build
 on:
   push:
@@ -13,6 +14,8 @@ jobs:
       BRANCH: ${GITHUB_REF##*/}
       SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      CLOUD_RUN_SERVICE: ahchecker
+      CLOUD_RUN_REGION: europe-west1
 
     steps:
       - name: Checkout
@@ -25,14 +28,22 @@ jobs:
           project_id: ${{ secrets.PROJECT_ID }}
           export_default_credentials: true
 
+      - name: Authorize Docker push
+        run: |
+          gcloud auth configure-docker
+
       - name: Build image
         run: |-
           docker build -t eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6} .
 
-      # Configure docker to use the gcloud command-line tool as a credential helper
-      - run: |
-          gcloud auth configure-docker -q
-      # Push image to Google Container Registry
-      - name: Push
+      - name: Push image
         run: |-
           docker push eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6}
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v0.2.0
+        with:
+          service: ${{ env.CLOUD_RUN_SERVICE }}
+          image: eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6}
+          region: ${{ env.CLOUD_RUN_REGION }}
+          env_vars: POSTCODE=${{ secrets.POSTCODE }},HOUSENUMBER=${{ secrets.HOUSENUMBER }},SLACK_WEB_HOOK=${{ secrets.SLACK_WEB_HOOK }},SLACK_CHANNEL=${{ secrets.SLACK_CHANNEL }}
