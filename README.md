@@ -18,3 +18,7 @@ Then you'll receive the available slots in your slack channel.
 
 ### Run in Google Cloud Run
 TBD
+
+### TODOs
+[] Auto deploy to cloud run.
+[] Capture cloud run setup in terraform.
