@@ -22,6 +22,8 @@ Here's my setup in Cloud Run:
 * Use Cloud Scheduler to send message to Pub/Sub every 10 minutes
 * Connect Pub/Sub with Cloud Run to trigger it to run
 
+Reference: https://cloud.google.com/run/docs/triggering/using-scheduler
+
 ### TODOs
 - [x] Auto deploy to cloud run.
 - [ ] Capture cloud run setup in terraform.
