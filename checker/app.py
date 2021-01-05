@@ -6,7 +6,7 @@ from checker.monitor import query_once
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
 def root():
     query_once()
     return "Hello!"

@@ -16,26 +16,26 @@ def run(playwright, postcode: str, housenumber: str):
     # assert page.url == "https://www.ah.nl/"
 
     # Click text="Online bestellen"
-    page.click("text=\"Online bestellen\"")
+    page.click('text="Online bestellen"')
     # assert page.url == "https://www.ah.nl/kies-een-moment"
 
     # Click input[name="easyTrial.postalCodeNld"]
-    page.click("input[name=\"easyTrial.postalCodeNld\"]")
+    page.click('input[name="easyTrial.postalCodeNld"]')
 
     # Fill input[name="easyTrial.postalCodeNld"]
-    page.fill("input[name=\"easyTrial.postalCodeNld\"]", postcode)
+    page.fill('input[name="easyTrial.postalCodeNld"]', postcode)
 
     # Press Tab
-    page.press("input[name=\"easyTrial.postalCodeNld\"]", "Tab")
+    page.press('input[name="easyTrial.postalCodeNld"]', "Tab")
 
     # Fill input[name="easyTrial.houseNumber"]
-    page.fill("input[name=\"easyTrial.houseNumber\"]", housenumber)
+    page.fill('input[name="easyTrial.houseNumber"]', housenumber)
 
     # Click text="Ga verder met online bestellen"
     # with page.expect_navigation(url="https://www.ah.nl/kies-een-moment/bezorgen"):
     with page.expect_navigation():
-        page.click("text=\"Ga verder met online bestellen\"")
-    
+        page.click('text="Ga verder met online bestellen"')
+
     result_json = None
 
     with page.expect_response("**/kies-een-moment/csrf/slots") as response:
