@@ -44,7 +44,10 @@ def query_once():
     result_json = get_slots_json(POSTCODE, HOUSENUMBER)
     slots = result_json["slots"]
     available_slots = [
-        slot for slot in slots if slot["bookedDeliveries"] < slot["maxDeliveries"]
+        slot
+        for slot in slots
+        if slot["bookedDeliveries"] < slot["maxDeliveries"]
+        and slot["serviceCharge"] < 5
     ]
 
     if not available_slots:
