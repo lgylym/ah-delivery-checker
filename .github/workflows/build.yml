@@ -42,4 +42,4 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |-
-          gcloud run deploy ahchecker --image eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6} --region=${{ env.CLOUD_RUN_REGION }}
+          gcloud run deploy ahchecker --platform=managed --image eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:${GITHUB_SHA::6} --region=${{ env.CLOUD_RUN_REGION }}
